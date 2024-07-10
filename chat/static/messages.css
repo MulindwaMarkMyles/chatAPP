@@ -1,0 +1,62 @@
+.form-container {
+    margin-left: 100px;
+    width: 100%;
+    position: fixed;
+    top:70px;
+    bottom:15px;
+    background-color: #DCFFFD;
+    border-radius: 7px;
+}
+ select {
+    flex:1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    font-family: "Poppins";
+    font-size: 15px;
+    color: #2C2C34;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    font-family: "Poppins";
+    font-size: 15px;
+    color: #fff;
+    background-color: #2C2C34;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline:none;
+    flex:1;
+}
+.bottom {
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+}
+textarea {
+    width:100%;
+    padding-right:200px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    font-family: "Poppins";
+    font-size: 15px;
+    color: #2C2C34;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    outline:none;
+}
+.message {
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    width:fit-content;
+    padding: 5px 10px;
+    background-color: #fff ;
+    font-family: "Poppins";
+}

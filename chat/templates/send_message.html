@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <link rel="stylesheet" href="{% static 'messages.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome.css' %}">
+    <title>CHAT APP</title>
+</head>
+
+<body>
+    <h2>MESSAGE PAGE</h2>
+    <div class="homepage">
+        <div class="sidebar">
+            <ul>
+                <li><a href="{% url 'home' %}"><i class="fa fa-home"></i></a></li>
+                <li><a href="{% url 'inbox' %}"><i class="fa fa-inbox"></i></a></li>
+                <li><a href="{% url 'send_message' %}"><i class="fa fa-paper-plane"></i></a></li>
+                <li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i></a></li>
+                <li><a href="{% url 'register' %}"><i class="fa fa-user-plus"></i></a></li>
+                <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i></a></li>
+            </ul>
+        </div>
+        <form class="form-container" id="message-form">
+            {% csrf_token %}
+            <ul class="message-container" id="message-list">
+            </ul>
+            <textarea name="content" id="message-content"
+                placeholder="Type your message here..."></textarea>
+            <div class="bottom">
+                {{ form.recipient }}
+                <button type="submit"><i class="fa fa-send-message"></i>SUBMIT</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById('message-form').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const formData = new FormData(form);
+            const userId = document.getElementById('recipient-select').value;
+            const messageValue = document.getElementById('message-content').value;
+
+            try {
+                const response = await fetch(`/accounts/send-message/${userId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                    },
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    const messageList = document.getElementById('message-list');
+
+                    // Create a new message element
+                    const newMessage = document.createElement('li');
+                    newMessage.className = 'message';
+                    newMessage.innerHTML = `
+                            <small>${messageValue}</small>
+                    `;
+
+                    // Append the new message to the list
+                    messageList.appendChild(newMessage);
+
+                    // Clear the input field
+                    document.getElementById('message-content').value = '';
+                } else {
+                    console.error('Failed to send message');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
+</body>
+
+</html>

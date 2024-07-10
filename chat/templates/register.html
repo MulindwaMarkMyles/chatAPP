@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome.css' %}">
+    <title>CHAT APP</title>
+</head>
+
+<body>
+    <h2>LOGIN PAGE</h2>
+    <div class="sidebar">
+        <ul>
+            <li><a href="{% url 'home' %}"><i class="fa fa-home"></i></a></li>
+            <li><a href="{% url 'inbox' %}"><i class="fa fa-inbox"></i></a></li>
+            <li><a href="{% url 'send_message' %}"><i class="fa fa-paper-plane"></i></a></li>
+            <li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i></a></li>
+            <li><a href="{% url 'register' %}"><i class="fa fa-user-plus"></i></a></li>
+            <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i></a></li>
+        </ul>
+    </div>
+    <div class="login-form">
+        <form method="POST">
+            {% csrf_token %}
+            {% if form.errors %}
+            <ul class="errorlist">
+                {% for field in form %}
+                {% for error in field.errors %}
+                <li><span>{{ error }}</span></li>
+                {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                <li><span>{{ error }}</span></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {{ form.username }}
+            {{ form.password1 }}
+            {{ form.password2 }}
+            <button type="submit">SignUP</button>
+        </form>
+    </div>
+</body>
+
+</html>

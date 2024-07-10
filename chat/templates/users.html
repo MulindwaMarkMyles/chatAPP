@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome.css' %}">
+    <title>CHAT APP</title>
+</head>
+
+<body>
+    <h2>HOME PAGE</h2>
+    <div class="homepage">
+        <div class="sidebar">
+            <ul>
+                <li><a href="{% url 'home' %}"><i class="fa fa-home"></i></a></li>
+                <li><a href="{% url 'inbox' %}"><i class="fa fa-inbox"></i></a></li>
+                <li><a href="{% url 'send_message' %}"><i class="fa fa-paper-plane"></i></a></li>
+                <li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i></a></li>
+                <li><a href="{% url 'register' %}"><i class="fa fa-user-plus"></i></a></li>
+                <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i></a></li>
+            </ul>
+        </div>
+        <div class="container">
+            <ul>
+                {% for user in users %}
+                <li class="user">
+                    <div class="image">
+                        <img src="{% static 'default.webp' %}" alt="">
+                    </div>
+                    <div class="cont-messages">
+                        <span>{{ user.username }}</span>
+                    </div>
+
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
